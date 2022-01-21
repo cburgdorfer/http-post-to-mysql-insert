@@ -14,7 +14,7 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS);
 $json = file_get_contents('php://input');
 
 // decode the json data
-$data = json_decode($json);
+$data = json_decode($json, true);
 
 // Check if request is legit
 if(md5($data["Area"].

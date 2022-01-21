@@ -53,7 +53,7 @@ VALUES
 	(?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 	
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param("ssssssss", 	$data["Area"],
+$stmt->bind_param('ssssssss', 	$data["Area"],
 								$data["DataID"],
 								$data["DataKind"],
 								$data["DateTime"],
@@ -69,4 +69,4 @@ if ($stmt->execute() === TRUE) {
 	error_log("Error: " . $sql . "<br>" . $mysqli->error);
 }
 
-$mysqli->close();
+$stmt->close();

@@ -28,7 +28,14 @@ $md5 = md5($data["Area"].
 	SALT);
 
 if($md5 != $data["Checksum"]) {
-		error_log("Checksum failed: ".$md5."/".$data["Checksum"]);
+		error_log("Checksum failed: ".$md5."("$data["Area"].
+	$data["DataID"].
+	$data["DataKind"].
+	$data["DateTime"].
+	$data["Layer"].
+	$data["LogicalDevice"].
+	$data["SenderID"].
+	$data["Value"].SALT")/".$data["Checksum"]);
 		die("Checksum failed.");
 }
 

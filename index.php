@@ -35,7 +35,7 @@ if($md5 != $data["Checksum"]) {
 	$data["Layer"].
 	$data["LogicalDevice"].
 	$data["SenderID"].
-	$data["Value"].SALT")/".$data["Checksum"]);
+	$data["Value"].SALT.")/".$data["Checksum"]);
 		die("Checksum failed.");
 }
 

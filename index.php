@@ -24,19 +24,19 @@ $md5 = md5($data["AreaName"].
 	$data["PhysicalDeviceId"].
 	$data["DataId"].
 	$data["Timestamp"].
-	$data["Layer"].
+	$data["LayerName"].
 	SALT);
 
 if($md5 != $data["Checksum"]) {
-	error_log("Checksum failed: ".$md5." md5(".$data["AreaName"].
+	error_log("Checksum failed: ".$md5." \n\nmd5(".$data["AreaName"].
 	$data["Data"].
 	$data["KindName"].
 	$data["PhysicalDeviceName"].
 	$data["PhysicalDeviceId"].
 	$data["DataId"].
 	$data["Timestamp"].
-	$data["Layer"].
-	SALT.") / ".$data["Checksum"] . "Checkstring from Gravio: ".$data['Checkstring']);
+	$data["LayerName"].
+	SALT.") / ".$data["Checksum"] . "Checkstring from Gravio: \n\n".$data['Checkstring']);
 
 		die("Checksum failed.");
 }

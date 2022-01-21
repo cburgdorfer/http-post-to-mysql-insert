@@ -36,7 +36,7 @@ if($md5 != $data["Checksum"]) {
 	$data["DataId"].
 	$data["Timestamp"].
 	$data["Layer"].
-	.SALT.") / ".$data["Checksum"] . "Checkstring from Gravio: ".$data['Checkstring']);
+	SALT.") / ".$data["Checksum"] . "Checkstring from Gravio: ".$data['Checkstring']);
 
 		die("Checksum failed.");
 }

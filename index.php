@@ -17,7 +17,7 @@ $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
 // Check if request is legit
-if(md5($data["Area"].
+$md5 = md5($data["Area"].
 	$data["DataID"].
 	$data["DataKind"].
 	$data["DateTime"].
@@ -25,13 +25,17 @@ if(md5($data["Area"].
 	$data["LogicalDevice"].
 	$data["SenderID"].
 	$data["Value"].
-	SALT) != $data["Checksum"]) {
+	SALT);
+
+if($md5 != $data["Checksum"]) {
+		error_log("Checksum failed: ".$md5."/".$data["Checksum"]);
 		die("Checksum failed.");
 }
 
 // Check connection
 if ($mysqli->connect_error) {
-  die("Connection failed: " . $mysqli->connect_error);
+	error_log("Connection failed: " . $mysqli->connect_error);
+  	die("Connection failed: " . $mysqli->connect_error);
 }
 
 $sql = "INSERT INTO gravio_data 
@@ -51,7 +55,7 @@ $stmt->bind_param("ssssssss", 	$data["Area"],
 
 
 if ($stmt->execute() === TRUE) {
-  	error_log("New record created successfully");
+  	error_log("New record created successfully:".$sql);
 } else {
 	error_log("Error: " . $sql . "<br>" . $mysqli->error);
 }

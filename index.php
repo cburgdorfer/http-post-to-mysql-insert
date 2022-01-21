@@ -48,18 +48,18 @@ if ($mysqli->connect_error) {
 }
 
 $sql = "INSERT INTO gravio_data 
-	(Area, Layer, DataKind, LogicalDevice, SenderID, DataID, DateTime, Value, created)
+	(Area, Layer, DataKind, LogicalDevice, SenderID, DataID, DateTime, Value)
 VALUES 
-	(?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+	(?, ?, ?, ?, ?, ?, ?, ?)";
 	
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param('ssssssss', 	$data["Area"],
-								$data["DataID"],
-								$data["DataKind"],
-								$data["DateTime"],
-								$data["Layer"],
-								$data["LogicalDevice"],
-								$data["SenderID"],
+$stmt = $mysqli->prepare("INSERT INTO gravio_data (Area, Layer, DataKind, LogicalDevice, SenderID, DataID, DateTime, Value) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param('ssssssss', 	$data["AreaName"],
+								$data["LayerName"],
+								$data["KindName"],
+								$data["PhysicalDeviceName"],
+								$data["PhysicalDeviceId"],
+								$data["DataId"],
+								$data["Timestamp"],
 								$data["Value"]);
 
 

@@ -17,25 +17,26 @@ $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
 // Check if request is legit
-$md5 = md5($data["Area"].
-	$data["DataID"].
-	$data["DataKind"].
-	$data["DateTime"].
+$md5 = md5($data["AreaName"].
+	$data["Data"].
+	$data["KindName"].
+	$data["PhysicalDeviceName"].
+	$data["PhysicalDeviceId"].
+	$data["DataId"].
+	$data["Timestamp"].
 	$data["Layer"].
-	$data["LogicalDevice"].
-	$data["SenderID"].
-	$data["Value"].
 	SALT);
 
 if($md5 != $data["Checksum"]) {
-	error_log("Checksum failed: ".$md5." md5(".$data["Area"].
-	$data["DataID"].
-	$data["DataKind"].
-	$data["DateTime"].
+	error_log("Checksum failed: ".$md5." md5(".$data["AreaName"].
+	$data["Data"].
+	$data["KindName"].
+	$data["PhysicalDeviceName"].
+	$data["PhysicalDeviceId"].
+	$data["DataId"].
+	$data["Timestamp"].
 	$data["Layer"].
-	$data["LogicalDevice"].
-	$data["SenderID"].
-	$data["Value"].SALT.") / ".$data["Checksum"] . "Checkstring from Gravio: ".$data['Checkstring']);
+	.SALT.") / ".$data["Checksum"] . "Checkstring from Gravio: ".$data['Checkstring']);
 
 		die("Checksum failed.");
 }

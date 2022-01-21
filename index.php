@@ -28,17 +28,8 @@ $md5 = md5($data["AreaName"].
 	SALT);
 
 if($md5 != $data["Checksum"]) {
-	error_log("Checksum failed: ".$md5." \n\nmd5(".$data["AreaName"].
-	$data["Data"].
-	$data["KindName"].
-	$data["PhysicalDeviceName"].
-	$data["PhysicalDeviceId"].
-	$data["DataId"].
-	$data["Timestamp"].
-	$data["LayerName"].
-	SALT.") / ".$data["Checksum"] . "Checkstring from Gravio: \n\n".$data['Checkstring']);
-
-		die("Checksum failed.");
+	error_log("Checksum failed: ".$md5." != ".$data["Checksum"].
+	die("Checksum failed.");
 }
 
 // Check connection
@@ -52,7 +43,10 @@ $sql = "INSERT INTO gravio_data
 VALUES 
 	(?, ?, ?, ?, ?, ?, ?, ?)";
 	
-$stmt = $mysqli->prepare("INSERT INTO gravio_data (Area, Layer, DataKind, LogicalDevice, SenderID, DataID, DateTime, Value) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+if($stmt = $mysqli->prepare("INSERT INTO gravio_data (Area, Layer, DataKind, LogicalDevice, SenderID, DataID, DateTime, Value) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) else {
+	error_log("statement preparation failed");
+}
+
 $stmt->bind_param('ssssssss', 	$data["AreaName"],
 								$data["LayerName"],
 								$data["KindName"],

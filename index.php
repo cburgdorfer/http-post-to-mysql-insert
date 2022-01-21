@@ -51,9 +51,9 @@ $stmt->bind_param("ssssssss", 	$data["Area"],
 
 
 if ($stmt->execute() === TRUE) {
-  echo "New record created successfully";
+  	error_log("New record created successfully");
 } else {
-  echo "Error: " . $sql . "<br>" . $mysqli->error;
+	error_log("Error: " . $sql . "<br>" . $mysqli->error);
 }
 
 $mysqli->close();

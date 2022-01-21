@@ -28,7 +28,7 @@ $md5 = md5($data["AreaName"].
 	SALT);
 
 if($md5 != $data["Checksum"]) {
-	error_log("Checksum failed: ".$md5." != ".$data["Checksum"].
+	error_log("Checksum failed: ".$md5." != ".$data["Checksum"]);
 	die("Checksum failed.");
 }
 
@@ -44,7 +44,7 @@ VALUES
 	(?, ?, ?, ?, ?, ?, ?, ?)";
 	
 if($stmt = $mysqli->prepare("INSERT INTO gravio_data (Area, Layer, DataKind, LogicalDevice, SenderID, DataID, DateTime, Value) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) else {
-	error_log("statement preparation failed");
+	error_log("statement preparation failed: " . $stmt->error);
 }
 
 $stmt->bind_param('ssssssss', 	$data["AreaName"],
@@ -60,7 +60,7 @@ $stmt->bind_param('ssssssss', 	$data["AreaName"],
 if ($stmt->execute() === TRUE) {
   	error_log("New record created successfully:".$sql);
 } else {
-	error_log("Error: " . $sql . "<br>" . $mysqli->error);
+	error_log("Error: " . $stmt->error);
 }
 
 $stmt->close();

@@ -43,7 +43,7 @@ $sql = "INSERT INTO gravio_data
 VALUES 
 	(?, ?, ?, ?, ?, ?, ?, ?)";
 	
-if($stmt = $mysqli->prepare("INSERT INTO gravio_data (Area, Layer, DataKind, LogicalDevice, SenderID, DataID, DateTime, Value) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) else {
+if($stmt = $mysqli->prepare("INSERT INTO gravio_data (Area, Layer, DataKind, LogicalDevice, SenderID, DataID, DateTime, Value) VALUES (?, ?, ?, ?, ?, ?, ?, ?)") != true) {
 	error_log("statement preparation failed: " . $stmt->error);
 }
 
@@ -57,7 +57,7 @@ $stmt->bind_param('ssssssss', 	$data["AreaName"],
 								$data["Value"]);
 
 
-if ($stmt->execute() === TRUE) {
+if ($stmt->execute() === true) {
   	error_log("New record created successfully:".$sql);
 } else {
 	error_log("Error: " . $stmt->error);

@@ -8,7 +8,7 @@ include_once("credentials.php"); // use credentials.php.sample
 // }
 
 // Create connection
-$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS);
+$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 // Get the JSON contents
 $json = file_get_contents('php://input');

@@ -41,7 +41,7 @@ if ($mysqli->connect_error) {
 }
 
 $sql = "INSERT INTO gravio_data 
-	(Area, Layer, DataKind, LogicalDevice, SenderID, DataID, DateTime, Value)
+	(AreaName, LayerName, DataKind, PhysicalDeviceName, PhysicalDeviceId, DataId, Timestamp, Data)
 VALUES 
 	(?, ?, ?, ?, ?, ?, ?, ?)";
 	

@@ -32,6 +32,8 @@ if($md5 != $data["Checksum"]) {
 	die("Checksum failed.");
 }
 
+error_log("Timestamp: ".$data['Timestamp']);
+
 // Check connection
 if ($mysqli->connect_error) {
 	error_log("Connection failed: " . $mysqli->connect_error);
@@ -51,7 +53,7 @@ $stmt->bind_param('ssssssss', 	$data["AreaName"],
 								$data["PhysicalDeviceName"],
 								$data["PhysicalDeviceId"],
 								$data["DataId"],
-								$data["Timestamp"],
+								date("Y-m-d H:i:s", $data["Timestamp"]),
 								$data["Data"]);
 
 

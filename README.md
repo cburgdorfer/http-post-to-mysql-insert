@@ -49,3 +49,6 @@ You can use a software similar to [Postman](https://www.postman.com/) to send HT
 ### Original purpose of this script
 
 I created this script so we can send IoT sensor data from the [Gravio IoT Edge Computing Platform](https://www.gravio.com) to a [MySQL Database](https://www.mysql.com/) that is accessible via the Internet, so we can connect [Google Data Studio](https://datastudio.google.com/) to it and visualise the data in a Google Data Studio Dashboard. Note, if you make your MySQL accessible via the open internet, ensure that you [enable SSL Certificates](https://dev.mysql.com/doc/mysql-security-excerpt/5.7/en/using-encrypted-connections.html) and use a firewall to limit access to authorized IP addresses, after you have set `bind-address = 127.0.0.1` to `bind-address = 0.0.0.0` in your MySQL config file!
+
+For more information about Gravio, please visit [gravio.com](www.gravio.com) 
+For more information about how to HTTP Post sensor data from Gravio to this script, visit (https://doc.gravio.com/manuals/gravio4/1/en/topic/httprequest)(https://doc.gravio.com/manuals/gravio4/1/en/topic/httprequest)

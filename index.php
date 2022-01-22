@@ -2,11 +2,6 @@
 
 include_once("credentials.php"); // use credentials.php.sample
 
-// check if the post is legit by comparing checksums
-// if($_POST['checksum'] != md5(SALT.$_POST['timestamp'])) {
-//	die("Checksum mismatch");
-// }
-
 // Create connection
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -27,19 +22,19 @@ $md5 = md5($data["AreaName"].
 	$data["LayerName"].
 	SALT);
 
+// check if checksum is correct
 if($md5 != $data["Checksum"]) {
-	error_log("Checksum failed: ".$md5." != ".$data["Checksum"]);
+	error_log("Checksum failed: " . $md5 . " != " . $data["Checksum"]);
 	die("Checksum failed.");
 }
 
-error_log("Timestamp: ".$data['Timestamp']);
-
 // Check connection
-if ($mysqli->connect_error) {
+if($mysqli->connect_error) {
 	error_log("Connection failed: " . $mysqli->connect_error);
   	die("Connection failed: " . $mysqli->connect_error);
 }
 
+// Construct SQL
 $sql = "INSERT INTO gravio_data 
 	(AreaName, LayerName, DataKind, PhysicalDeviceName, PhysicalDeviceId, DataId, Timestamp, Data)
 VALUES 
@@ -56,10 +51,7 @@ $stmt->bind_param('ssssssss', 	$data["AreaName"],
 								date("Y-m-d H:i:s", $data["Timestamp"]),
 								$data["Data"]);
 
-
-if ($stmt->execute() === true) {
-  	error_log("New record created successfully:".$sql);
-} else {
+if(!$stmt->execute()) {
 	error_log("Error: " . $stmt->error);
 }
 
